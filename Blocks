@@ -1,0 +1,34 @@
+# CSCI 3308: Ruby Assignment 1
+# Emily Owens
+# Last updated: 1/29/14
+# Part 11: Cartesian Product
+# Thanks to Jessica Lynch
+
+
+class CartesianProduct
+
+    include Enumerable
+
+    def initialize(array1, array2)
+    	@array1 = array1
+    	@array2 = array2
+    end
+    
+    def each
+    	@array1.each do |array1|
+    		@array2.each do |array2|
+    			yield [array1,array2]
+    		end
+    	end
+    end
+
+end
+
+
+# Test Code
+
+c = CartesianProduct.new([:a,:b], [4,5])
+c.each { |elt| puts elt.inspect }
+
+p = CartesianProduct.new(['spooky', 'scary', 'creepy', 'ghastly'], ['skeleton', 'zombie', 'gremlin'])
+p.each { |elt| puts elt.inspect }
