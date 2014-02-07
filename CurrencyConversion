@@ -1,0 +1,45 @@
+# CSCI 3308: Ruby Assignment 1
+# Emily Owens
+# Last updated: 1/29/14
+#
+# Part9: Currency conversion
+
+class Numeric
+
+	@@currencies = {'yen' => 0.013, 'euro'=> 1.292, 'rupee'=> 0.019, 'dollar' => 1}
+	
+	def method_missing(method_id)
+		# Strips the 's' character of end of input
+		singular_currency = method_id.to_s.gsub(/s$/,'')
+		
+		if @@currencies.has_key?(singular_currency)
+			self * @@currencies[singular_currency]	
+		else
+			super
+		end
+	
+	end
+
+	def in(currency)
+		
+		singular_currency = currency.to_s.gsub(/s$/,'')
+		
+		if @@currencies.has_key?(singular_currency)
+			self / @@currencies[singular_currency]	
+		else
+			super
+		end
+	end
+			
+
+end
+
+#Test cases
+
+p 5.yen.in(:euros)
+
+p 10.euros.in(:rupees)
+
+p 15.rupee.in(:euros)
+
+p 5.dollars.in(:rupee)
